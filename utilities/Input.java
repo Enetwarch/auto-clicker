@@ -1,5 +1,4 @@
 package utilities;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Input {
@@ -7,7 +6,7 @@ public class Input {
     public static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_ERROR = "INPUT ERROR";
 
-    private static void inputMessage(String message) {
+    private static void inputMessageInt(String message) {
         System.out.printf("%s: ", message);
     }
 
@@ -16,16 +15,14 @@ public class Input {
     }
 
     public static int getUserInputInt(String message, int min, int max) {
-        int userInput; 
+        int userInput;
         while (true) {
             try {
-                inputMessage(message);
-                userInput = scanner.nextInt(); 
-            } catch (InputMismatchException e) {
+                inputMessageInt(message);
+                userInput = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
                 inputErrorInt(min, max); 
                 continue;
-            } finally {
-                scanner.nextLine();
             }
             if (userInput >= min && userInput <= max) {
                 return userInput; 

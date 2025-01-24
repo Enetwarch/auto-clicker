@@ -14,20 +14,26 @@ public class Clicker {
     private volatile boolean running = false;
     private Thread virtualThread;
 
+    private void loopClicks() {
+        while (running) {
+            try {
+                Output.robot.mousePress(this.mouseButton);
+                Output.robot.mouseRelease(this.mouseButton);
+                Thread.sleep(this.clickerDelay);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+    }
+
     public void startClicking() {
         running = true;
-        virtualThread = Thread.ofVirtual().start(() -> {
-            while (running) {
-                try {
-                    Output.robot.mousePress(this.mouseButton);
-                    Output.robot.mouseRelease(this.mouseButton);
-                    Thread.sleep(this.clickerDelay);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
-                }
+        virtualThread = Thread.ofVirtual().start(
+            () -> {
+                loopClicks();
             }
-        });
+        );
     }
 
     public void stopClicking() {
