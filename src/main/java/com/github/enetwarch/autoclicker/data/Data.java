@@ -1,4 +1,4 @@
-package data;
+package com.github.enetwarch.autoclicker.data;
 import java.awt.event.InputEvent;
 
 public enum Data {

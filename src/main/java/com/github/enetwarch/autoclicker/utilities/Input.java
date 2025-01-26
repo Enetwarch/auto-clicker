@@ -1,4 +1,4 @@
-package utilities;
+package com.github.enetwarch.autoclicker.utilities;
 import java.util.Scanner;
 
 public class Input {

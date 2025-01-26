@@ -1,5 +1,5 @@
-package output;
-import utilities.Output;
+package com.github.enetwarch.autoclicker.output;
+import com.github.enetwarch.autoclicker.utilities.Output;
 
 public class Clicker {
 

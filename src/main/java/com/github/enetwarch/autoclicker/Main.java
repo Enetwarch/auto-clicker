@@ -1,8 +1,10 @@
-import data.Data;
-import output.Clicker;
-import utilities.Input;
-import utilities.Interface;
-import utilities.Output;
+package com.github.enetwarch.autoclicker;
+
+import com.github.enetwarch.autoclicker.data.Data;
+import com.github.enetwarch.autoclicker.output.Clicker;
+import com.github.enetwarch.autoclicker.utilities.Input;
+import com.github.enetwarch.autoclicker.utilities.Interface;
+import com.github.enetwarch.autoclicker.utilities.Output;
 
 public class Main {
 

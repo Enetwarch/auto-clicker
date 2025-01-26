@@ -1,4 +1,4 @@
-package utilities;
+package com.github.enetwarch.autoclicker.utilities;
 
 public record Interface(int input, String output, Runnable runnable) {
 

@@ -1,2 +1,6 @@
-*.class
-# Ignores compiled files.
+.idea/
+*.iml
+# Ignores IntelliJ files.
+
+target/
+# Ignores Maven target directory.
