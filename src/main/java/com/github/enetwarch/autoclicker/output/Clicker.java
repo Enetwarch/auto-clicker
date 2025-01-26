@@ -29,11 +29,7 @@ public class Clicker {
 
     public void startClicking() {
         running = true;
-        virtualThread = Thread.ofVirtual().start(
-            () -> {
-                loopClicks();
-            }
-        );
+        virtualThread = Thread.ofVirtual().start(this::loopClicks);
     }
 
     public void stopClicking() {
