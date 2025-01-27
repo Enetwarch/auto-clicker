@@ -1,3 +1,3 @@
 # Autoclicker
 
-This is a basic autoclicker made in Java. The controls are a bit clunky due to the program relying on CLI (Command Line Interface) to detect user inputs. Future updates will implement global key listener from [jnativehook](https://github.com/kwhat/jnativehook) to solve this issue. It will then only require the user to run the program in the CLI once, and activate or deactivate the autoclicker using the coded hotkey anywhere regardless of focused window or not.
+This is a basic personal autoclicker I made in Java that opens in the CLI. Pressing F9 will toggle the autoclicker on or off while pressing F10 will terminate the program. Once initialized, the program can take in hotkey inputs everywhere in the screen. This is done by implementing the [jnativehook library](https://github.com/kwhat/jnativehook/tree/2.2), specifically the global key listener and other related modules.
