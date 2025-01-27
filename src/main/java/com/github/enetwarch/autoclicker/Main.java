@@ -1,30 +1,44 @@
 package com.github.enetwarch.autoclicker;
-import com.github.enetwarch.autoclicker.data.Data;
+import java.awt.Robot;
+import java.awt.AWTException;
 import com.github.enetwarch.autoclicker.output.Clicker;
-import com.github.enetwarch.autoclicker.utilities.Input;
-import com.github.enetwarch.autoclicker.utilities.Interface;
-import com.github.enetwarch.autoclicker.utilities.Output;
+import com.github.enetwarch.autoclicker.output.MouseClicker;
+import com.github.enetwarch.autoclicker.data.OutputData;
+import com.github.enetwarch.autoclicker.input.GlobalKeyListener;
+import com.github.enetwarch.autoclicker.data.InputData;
+import com.github.kwhat.jnativehook.GlobalScreen;
+import com.github.kwhat.jnativehook.NativeHookException;
 
 public class Main {
 
-    private static final Clicker clicker = new Clicker(Data.MOUSE_BUTTON.get(), Data.CLICKER_DELAY.get());
-
-    private static final Interface[] interfaceArray = new Interface[] {
-        new Interface(1, "Start Clicker", clicker::startClicking),
-        new Interface(2, "Stop Clicker", clicker::stopClicking),
-        new Interface(0, "Exit Program", Output::terminateProgram)
-    };
-
-    private static final int INTERFACE_MIN = 0;
-    private static final int INTERFACE_MAX = interfaceArray.length - 1;
-
     public static void main(String[] args) {
-        while(true) {
-            Interface.printInterface(interfaceArray);
-            int userInput = Input.getUserInputInt("Choose Action", INTERFACE_MIN, INTERFACE_MAX);
-            System.out.printf("%n");
-            Interface.inputRunnable(interfaceArray, userInput);
+
+        Robot robot = null;
+
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            System.err.println("There was a problem initializing the robot.");
+            System.err.println(e.getMessage());
+            System.exit(1);
         }
+
+        Clicker mouseClicker = new MouseClicker(robot, OutputData.MOUSE_BUTTON.get(), OutputData.CLICKER_DELAY.get());
+        GlobalKeyListener globalKeyListener = new GlobalKeyListener(mouseClicker, InputData.KEYBOARD_BUTTON.get());
+
+        try {
+            GlobalScreen.registerNativeHook();
+        }
+        catch (NativeHookException ex) {
+            System.err.println("There was a problem registering the native hook.");
+            System.err.println(ex.getMessage());
+            System.exit(1);
+        }
+
+        GlobalScreen.addNativeKeyListener(globalKeyListener);
+
+        System.out.printf("Autoclicker initialized%n");
+
     }
 
 }

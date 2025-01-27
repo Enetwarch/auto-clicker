@@ -1,19 +1,20 @@
 package com.github.enetwarch.autoclicker.data;
+
 import java.awt.event.InputEvent;
 
-public enum Data {
- 
+public enum OutputData {
+
     MOUSE_BUTTON(InputEvent.BUTTON1_DOWN_MASK),
     CLICKER_DELAY(100);
 
-    private final int data;
+    private final int outputData;
 
-    private Data(int data) {
-        this.data = data;
+    OutputData(int outputData) {
+        this.outputData = outputData;
     }
 
     public int get() {
-        return data;
+        return outputData;
     }
 
 }
