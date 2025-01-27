@@ -70,6 +70,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <outputFile>${project.build.directory}/${project.artifactId}-${project.version}.jar</outputFile>
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
