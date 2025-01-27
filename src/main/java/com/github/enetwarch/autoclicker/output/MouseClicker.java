@@ -32,14 +32,14 @@ public class MouseClicker implements Clicker {
     @Override
     public void startClicking() {
         running = true;
-        System.out.printf("Starting autoclicker...%n");
+        System.out.println("Autoclicker toggle ON");
         virtualThread = Thread.ofVirtual().start(this::loopClicks);
     }
 
     @Override
     public void stopClicking() {
         running = false;
-        System.out.printf("Stopping autoclicker...%n");
+        System.out.println("Autoclicker toggle OFF");
         if (virtualThread != null) {
             virtualThread.interrupt();
         }

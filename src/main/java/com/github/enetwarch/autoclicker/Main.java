@@ -37,7 +37,7 @@ public class Main {
 
         GlobalScreen.addNativeKeyListener(globalKeyListener);
 
-        System.out.printf("Autoclicker initialized%n");
+        System.out.println("Autoclicker initialized!");
 
     }
 
