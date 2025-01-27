@@ -24,7 +24,7 @@ public class Main {
         }
 
         Clicker mouseClicker = new MouseClicker(robot, OutputData.MOUSE_BUTTON.get(), OutputData.CLICKER_DELAY.get());
-        GlobalKeyListener globalKeyListener = new GlobalKeyListener(mouseClicker, InputData.KEYBOARD_BUTTON.get());
+        GlobalKeyListener globalKeyListener = new GlobalKeyListener(mouseClicker, InputData.TOGGLE_SWITCH.get(), InputData.KILL_SWITCH.get());
 
         try {
             GlobalScreen.registerNativeHook();

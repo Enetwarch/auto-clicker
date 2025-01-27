@@ -6,21 +6,27 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 public class GlobalKeyListener implements NativeKeyListener {
 
     private final Clicker clicker;
-    private final int keyboardButton;
-    public GlobalKeyListener(Clicker clicker, int keyboardButton) {
+    private final int toggleSwitch;
+    private final int killSwitch;
+    public GlobalKeyListener(Clicker clicker, int toggleSwitch, int killSwitch) {
         this.clicker = clicker;
-        this.keyboardButton = keyboardButton;
+        this.toggleSwitch = toggleSwitch;
+        this.killSwitch = killSwitch;
     }
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
-        // Unused override
+        int keyCode = e.getKeyCode();
+        if (keyCode == killSwitch) {
+            System.out.println("Program terminated.");
+            System.exit(0);
+        }
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
         int keyCode = e.getKeyCode();
-        if (keyCode == keyboardButton) {
+        if (keyCode == toggleSwitch) {
             clicker.toggleClicker();
         }
     }

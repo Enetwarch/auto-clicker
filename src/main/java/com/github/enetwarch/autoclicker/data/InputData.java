@@ -4,7 +4,8 @@ import java.awt.event.InputEvent;
 
 public enum InputData {
 
-    KEYBOARD_BUTTON(NativeKeyEvent.VC_F6);
+    TOGGLE_SWITCH(NativeKeyEvent.VC_F9),
+    KILL_SWITCH(NativeKeyEvent.VC_F10);
 
     private final int inputData;
 
