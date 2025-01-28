@@ -1,6 +1,5 @@
 package com.github.enetwarch.autoclicker.data;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
-import java.awt.event.InputEvent;
 
 public enum InputData {
 

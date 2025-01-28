@@ -12,9 +12,7 @@ import com.github.kwhat.jnativehook.NativeHookException;
 public class Main {
 
     public static void main(String[] args) {
-
         Robot robot = null;
-
         try {
             robot = new Robot();
         } catch (AWTException e) {
@@ -22,10 +20,8 @@ public class Main {
             System.err.println(e.getMessage());
             System.exit(1);
         }
-
         Clicker mouseClicker = new MouseClicker(robot, OutputData.MOUSE_BUTTON.get(), OutputData.CLICKER_DELAY.get());
         GlobalKeyListener globalKeyListener = new GlobalKeyListener(mouseClicker, InputData.TOGGLE_SWITCH.get(), InputData.KILL_SWITCH.get());
-
         try {
             GlobalScreen.registerNativeHook();
         }
@@ -34,11 +30,8 @@ public class Main {
             System.err.println(ex.getMessage());
             System.exit(1);
         }
-
         GlobalScreen.addNativeKeyListener(globalKeyListener);
-
         System.out.println("Autoclicker initialized!");
-
     }
 
 }

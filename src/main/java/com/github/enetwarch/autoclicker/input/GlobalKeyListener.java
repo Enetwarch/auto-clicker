@@ -8,6 +8,7 @@ public class GlobalKeyListener implements NativeKeyListener {
     private final Clicker clicker;
     private final int toggleSwitch;
     private final int killSwitch;
+
     public GlobalKeyListener(Clicker clicker, int toggleSwitch, int killSwitch) {
         this.clicker = clicker;
         this.toggleSwitch = toggleSwitch;
