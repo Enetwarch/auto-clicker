@@ -1,28 +1,34 @@
 package com.github.enetwarch.autoclicker.output;
 import java.awt.Robot;
+import java.awt.AWTException;
+import java.awt.event.InputEvent;
 import com.github.enetwarch.autoclicker.util.Format;
 
-public class MouseClicker implements Clicker {
+public class MouseClicker {
 
-    private final Robot robot;
-    private final int mouseButton;
-    private final int clickerDelay;
-
-    public MouseClicker(Robot robot, int mouseButton, int clickerDelay) {
-        this.robot = robot;
-        this.mouseButton = mouseButton;
-        this.clickerDelay = clickerDelay;
+    private static Robot robot;
+    static {
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            System.err.println("There was a problem initializing the robot.");
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
     }
 
-    private volatile boolean running = false;
-    private Thread virtualThread;
+    private static final int MOUSE_BUTTON = InputEvent.BUTTON1_DOWN_MASK;
+    private static final int CLICKER_DELAY = 10;
 
-    private void loopClicks() {
+    private static volatile boolean running = false;
+    private static Thread virtualThread;
+
+    private static void loopClicks() {
         while (running) {
             try {
-                robot.mousePress(this.mouseButton);
-                robot.mouseRelease(this.mouseButton);
-                Thread.sleep(this.clickerDelay);
+                robot.mousePress(MOUSE_BUTTON);
+                robot.mouseRelease(MOUSE_BUTTON);
+                Thread.sleep(CLICKER_DELAY);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;
@@ -30,15 +36,13 @@ public class MouseClicker implements Clicker {
         }
     }
 
-    @Override
-    public void startClicking() {
+    private static void startClicking() {
         running = true;
         Format.printMessage("Autoclicker toggle ON");
-        virtualThread = Thread.ofVirtual().start(this::loopClicks);
+        virtualThread = Thread.ofVirtual().start(MouseClicker::loopClicks);
     }
 
-    @Override
-    public void stopClicking() {
+    private static void stopClicking() {
         running = false;
         Format.printMessage("Autoclicker toggle OFF");
         if (virtualThread != null) {
@@ -46,8 +50,7 @@ public class MouseClicker implements Clicker {
         }
     }
 
-    @Override
-    public void toggleClicker() {
+    public static void toggleClicker() {
         if (running) {
             stopClicking();
         } else {

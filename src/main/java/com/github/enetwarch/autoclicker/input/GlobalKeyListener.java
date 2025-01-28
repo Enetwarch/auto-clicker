@@ -1,27 +1,32 @@
 package com.github.enetwarch.autoclicker.input;
-import com.github.enetwarch.autoclicker.output.Clicker;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
+import com.github.kwhat.jnativehook.GlobalScreen;
+import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 import com.github.enetwarch.autoclicker.util.Format;
+import com.github.enetwarch.autoclicker.output.MouseClicker;
 
 public class GlobalKeyListener implements NativeKeyListener {
 
-    private final Clicker clicker;
-    private final int toggleSwitch;
-    private final int killSwitch;
+    private static final int TOGGLE_SWITCH = NativeKeyEvent.VC_F9;
+    private static final int KILL_SWITCH = NativeKeyEvent.VC_F10;
 
-    public GlobalKeyListener(Clicker clicker, int toggleSwitch, int killSwitch) {
-        this.clicker = clicker;
-        this.toggleSwitch = toggleSwitch;
-        this.killSwitch = killSwitch;
+    public GlobalKeyListener() {
+        try {
+            GlobalScreen.registerNativeHook();
+        }
+        catch (NativeHookException ex) {
+            System.err.println("There was a problem registering the native hook.");
+            System.err.println(ex.getMessage());
+            System.exit(1);
+        }
+        GlobalScreen.addNativeKeyListener(this);
     }
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
         int keyCode = e.getKeyCode();
-        if (keyCode == killSwitch) {
+        if (keyCode == KILL_SWITCH) {
             Format.printMessage("Program terminated.");
             System.exit(0);
         }
@@ -30,8 +35,8 @@ public class GlobalKeyListener implements NativeKeyListener {
     @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
         int keyCode = e.getKeyCode();
-        if (keyCode == toggleSwitch) {
-            clicker.toggleClicker();
+        if (keyCode == TOGGLE_SWITCH) {
+            MouseClicker.toggleClicker();
         }
     }
 
