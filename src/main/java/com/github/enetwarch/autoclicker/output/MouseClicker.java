@@ -1,20 +1,17 @@
 package com.github.enetwarch.autoclicker.output;
 import java.awt.Robot;
-import java.util.logging.Logger;
-import java.util.logging.Level;
+import com.github.enetwarch.autoclicker.util.Format;
 
 public class MouseClicker implements Clicker {
 
     private final Robot robot;
     private final int mouseButton;
     private final int clickerDelay;
-    private final Logger logger;
 
-    public MouseClicker(Robot robot, int mouseButton, int clickerDelay, Logger logger) {
+    public MouseClicker(Robot robot, int mouseButton, int clickerDelay) {
         this.robot = robot;
         this.mouseButton = mouseButton;
         this.clickerDelay = clickerDelay;
-        this.logger = logger;
     }
 
     private volatile boolean running = false;
@@ -36,14 +33,14 @@ public class MouseClicker implements Clicker {
     @Override
     public void startClicking() {
         running = true;
-        logger.log(Level.INFO, "Autoclicker toggle ON");
+        Format.printMessage("Autoclicker toggle ON");
         virtualThread = Thread.ofVirtual().start(this::loopClicks);
     }
 
     @Override
     public void stopClicking() {
         running = false;
-        logger.log(Level.INFO, "Autoclicker toggle OFF");
+        Format.printMessage("Autoclicker toggle OFF");
         if (virtualThread != null) {
             virtualThread.interrupt();
         }

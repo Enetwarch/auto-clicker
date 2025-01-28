@@ -4,26 +4,25 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import com.github.enetwarch.autoclicker.util.Format;
 
 public class GlobalKeyListener implements NativeKeyListener {
 
     private final Clicker clicker;
     private final int toggleSwitch;
     private final int killSwitch;
-    private final Logger logger;
 
-    public GlobalKeyListener(Clicker clicker, int toggleSwitch, int killSwitch, Logger logger) {
+    public GlobalKeyListener(Clicker clicker, int toggleSwitch, int killSwitch) {
         this.clicker = clicker;
         this.toggleSwitch = toggleSwitch;
         this.killSwitch = killSwitch;
-        this.logger = logger;
     }
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
         int keyCode = e.getKeyCode();
         if (keyCode == killSwitch) {
-            logger.log(Level.INFO, "Program terminated.");
+            Format.printMessage("Program terminated.");
             System.exit(0);
         }
     }
