@@ -4,7 +4,7 @@ import java.awt.AWTException;
 import java.awt.event.InputEvent;
 import com.github.enetwarch.autoclicker.util.Format;
 
-public class MouseClicker {
+public class Clicker {
 
     private static Robot robot;
     static {
@@ -39,7 +39,7 @@ public class MouseClicker {
     private static void startClicking() {
         running = true;
         Format.printMessage("Autoclicker toggle ON");
-        virtualThread = Thread.ofVirtual().start(MouseClicker::loopClicks);
+        virtualThread = Thread.ofVirtual().start(Clicker::loopClicks);
     }
 
     private static void stopClicking() {

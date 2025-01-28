@@ -4,14 +4,14 @@ import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.enetwarch.autoclicker.util.Format;
-import com.github.enetwarch.autoclicker.output.MouseClicker;
+import com.github.enetwarch.autoclicker.output.Clicker;
 
-public class GlobalKeyListener implements NativeKeyListener {
+public class Hook implements NativeKeyListener {
 
     private static final int TOGGLE_SWITCH = NativeKeyEvent.VC_F9;
     private static final int KILL_SWITCH = NativeKeyEvent.VC_F10;
 
-    public GlobalKeyListener() {
+    public Hook() {
         try {
             GlobalScreen.registerNativeHook();
         }
@@ -36,7 +36,7 @@ public class GlobalKeyListener implements NativeKeyListener {
     public void nativeKeyReleased(NativeKeyEvent e) {
         int keyCode = e.getKeyCode();
         if (keyCode == TOGGLE_SWITCH) {
-            MouseClicker.toggleClicker();
+            Clicker.toggleClicker();
         }
     }
 
