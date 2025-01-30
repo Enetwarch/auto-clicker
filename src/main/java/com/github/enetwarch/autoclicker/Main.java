@@ -1,6 +1,6 @@
 package com.github.enetwarch.autoclicker;
-import com.github.enetwarch.autoclicker.input.Hook;
 import com.github.enetwarch.autoclicker.util.Format;
+import com.github.enetwarch.autoclicker.input.Hook;
 
 public class Main {
 

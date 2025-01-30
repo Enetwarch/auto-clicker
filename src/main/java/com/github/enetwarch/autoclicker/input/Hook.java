@@ -1,10 +1,10 @@
 package com.github.enetwarch.autoclicker.input;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-import com.github.kwhat.jnativehook.GlobalScreen;
-import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
-import com.github.enetwarch.autoclicker.util.Format;
+import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.enetwarch.autoclicker.output.Clicker;
+import com.github.enetwarch.autoclicker.util.Format;
+import com.github.kwhat.jnativehook.GlobalScreen;
 
 public class Hook implements NativeKeyListener {
 

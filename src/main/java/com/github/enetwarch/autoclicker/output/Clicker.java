@@ -1,8 +1,8 @@
 package com.github.enetwarch.autoclicker.output;
-import java.awt.Robot;
-import java.awt.AWTException;
-import java.awt.event.InputEvent;
 import com.github.enetwarch.autoclicker.util.Format;
+import java.awt.event.InputEvent;
+import java.awt.AWTException;
+import java.awt.Robot;
 
 public class Clicker {
 
@@ -19,20 +19,14 @@ public class Clicker {
 
     private static final int MOUSE_BUTTON = InputEvent.BUTTON1_DOWN_MASK;
     private static final int CLICKER_DELAY = 10;
-
     private static volatile boolean running = false;
     private static Thread virtualThread;
 
-    private static void loopClicks() {
-        while (running) {
-            try {
-                robot.mousePress(MOUSE_BUTTON);
-                robot.mouseRelease(MOUSE_BUTTON);
-                Thread.sleep(CLICKER_DELAY);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
-            }
+    public static void toggleClicker() {
+        if (running) {
+            stopClicking();
+        } else {
+            startClicking();
         }
     }
 
@@ -50,11 +44,16 @@ public class Clicker {
         }
     }
 
-    public static void toggleClicker() {
-        if (running) {
-            stopClicking();
-        } else {
-            startClicking();
+    private static void loopClicks() {
+        while (running) {
+            try {
+                robot.mousePress(MOUSE_BUTTON);
+                robot.mouseRelease(MOUSE_BUTTON);
+                Thread.sleep(CLICKER_DELAY);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
         }
     }
 
