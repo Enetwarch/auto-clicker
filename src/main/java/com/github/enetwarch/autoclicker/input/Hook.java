@@ -25,7 +25,7 @@ public class Hook implements NativeKeyListener {
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
-        int keyCode = e.getKeyCode();
+        final int keyCode = e.getKeyCode();
         if (keyCode == KILL_SWITCH) {
             Format.printMessage("Program terminated.");
             System.exit(0);
@@ -34,7 +34,7 @@ public class Hook implements NativeKeyListener {
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
-        int keyCode = e.getKeyCode();
+        final int keyCode = e.getKeyCode();
         if (keyCode == TOGGLE_SWITCH) {
             Clicker.toggleClicker();
         }

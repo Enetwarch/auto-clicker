@@ -30,18 +30,18 @@ public class Clicker {
         }
     }
 
-    private static void startClicking() {
-        running = true;
-        Format.printMessage("Autoclicker toggle ON");
-        virtualThread = Thread.ofVirtual().start(Clicker::loopClicks);
-    }
-
     private static void stopClicking() {
         running = false;
         Format.printMessage("Autoclicker toggle OFF");
         if (virtualThread != null) {
             virtualThread.interrupt();
         }
+    }
+
+    private static void startClicking() {
+        running = true;
+        Format.printMessage("Autoclicker toggle ON");
+        virtualThread = Thread.ofVirtual().start(Clicker::loopClicks);
     }
 
     private static void loopClicks() {
